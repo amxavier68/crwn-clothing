@@ -1,17 +1,18 @@
-const path = require("path");
+const path = require('path');
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: "development",
-  target: "web",
-  devtool: "inline-source-map",
+  mode: 'development',
+  target: 'web',
+  devtool: 'inline-source-map',
 
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "js/[name].js",
-    clean: true
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'js/[name].js',
+    clean: true,
   },
 
   devServer: {
@@ -22,10 +23,11 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: "CRWN - Clothing",
-      template: "./public/index.html",
-      filename: "index.html"
+      title: 'CRWN - Clothing',
+      template: './public/index.html',
+      filename: 'index.html',
     }),
+    new MiniCssExtractPlugin(),
   ],
 
   module: {
@@ -33,21 +35,21 @@ module.exports = {
       {
         test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
-        use: { loader: "babel-loader" }
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.(s[ac]|c)ss$/i,
-        use: [ 
-          MiniCssExtractPlugin.loader, 
-          "css-loader", 
-          "sass-loader",
-          "postcss-loader" 
-        ]
-      }
-    ]
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          'postcss-loader',
+        ],
+      },
+    ],
   },
 
   resolve: {
-    extensions: [ ".js", ".jsx" ]
-  }
+    extensions: ['.js', '.jsx'],
+  },
 };
