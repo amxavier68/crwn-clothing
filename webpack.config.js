@@ -23,7 +23,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "CRWN - Clothing",
-      template: "public/index.html",
+      template: "./public/index.html",
       filename: "index.html"
     }),
   ],
@@ -34,7 +34,20 @@ module.exports = {
         test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
         use: { loader: "babel-loader" }
+      },
+      {
+        test: /\.(s[ac]|c)ss$/i,
+        use: [ 
+          MiniCssExtractPlugin.loader, 
+          "css-loader", 
+          "sass-loader",
+          "postcss-loader" 
+        ]
       }
     ]
+  },
+
+  resolve: {
+    extensions: [ ".js", ".jsx" ]
   }
 };
